@@ -172,5 +172,27 @@ namespace Fractals
                 }
             }
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pictureBox.Image != null){
+                SaveFileDialog savedialog = new SaveFileDialog();
+                savedialog.Title = "Сохранить картинку как...";
+                savedialog.OverwritePrompt = true;
+                savedialog.CheckPathExists = true;
+                savedialog.Filter = "Image Files(*.BMP)|*.BMP|Image Files(*.JPG)|*.JPG|Image Files(*.GIF)|*.GIF|Image Files(*.PNG)|*.PNG|All files (*.*)|*.*";
+                savedialog.ShowHelp = true;
+                if (savedialog.ShowDialog() == DialogResult.OK) 
+                    try{
+                        pictureBox.Image.Save(savedialog.FileName);
+                    }catch (Exception){
+                        MessageBox.Show("Ошибка", "Невозможно сохранить изображение",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+            }else{
+                MessageBox.Show("Изображение не нарисовано", "Невозможно сохранить изображение",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

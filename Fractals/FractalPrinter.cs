@@ -57,7 +57,7 @@ namespace Fractals
         {
             setBitmap();
             this.gosper = new Gosper();
-            this.gosper.Draw(this.x / 16, this.y * 3 / 4, (this.x + this.y) * 2 / 5, 0, degree, 0, graphics);
+            this.gosper.Draw(this.x / 16, this.y * 3 / 4, (this.x + this.y) * 2 / 5, 0, degree, 0, graphics, COLORS, degree, 0);
             return this.bitmap;
         }
 
