@@ -194,5 +194,22 @@ namespace Fractals
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ((ComboBox)sender).DroppedDown = true;
+            if (char.IsControl(e.KeyChar))
+                return;
+            string temp = ((ComboBox)sender).Text.Substring(0, ((ComboBox)sender).SelectionStart)
+                + e.KeyChar.ToString();
+            int Index = ((ComboBox)sender).FindStringExact(temp);
+            if (Index == -1)
+                Index = ((ComboBox)sender).FindString(temp);
+            ((ComboBox)sender).SelectedIndex = Index;
+            ((ComboBox)sender).SelectionStart = temp.Length;
+            ((ComboBox)sender).SelectionLength =
+                ((ComboBox)sender).Text.Length - ((ComboBox)sender).SelectionStart;
+            e.Handled = true;
+        }
     }
 }

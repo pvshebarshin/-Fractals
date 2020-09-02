@@ -80,7 +80,7 @@ namespace Fractals
             PointF left_point = new PointF(0, serpinskiTriangle.Height);
             PointF right_point = new PointF(serpinskiTriangle.Width, serpinskiTriangle.Height);
 
-            serpinskiTriangle.Draw(degree , top_point, left_point, right_point, this.graphics);
+            serpinskiTriangle.Draw(degree , top_point, left_point, right_point, this.graphics, COLORS);
             return this.bitmap;
         }
 

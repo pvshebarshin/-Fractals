@@ -9,19 +9,20 @@ namespace Fractals
 
         }
 
-        public void Draw(int degree, PointF top, PointF left, PointF right, Graphics graphics)
+        public void Draw(int degree, PointF top, PointF left, PointF right, Graphics graphics, Color[] colors)
         {
             if (degree == 0) {
                 PointF[] points = new PointF[3]{ top, right, left };
-                graphics.FillPolygon(Brushes.Black, points);
+                SolidBrush brush = new SolidBrush(colors[degree]);
+                graphics.FillPolygon(brush, points);
             } else {
                 PointF left_mid = MidPoint(top, left);
                 PointF right_mid = MidPoint(top, right);
                 PointF top_mid = MidPoint(left, right);
 
-                Draw(degree - 1, top, left_mid, right_mid, graphics);
-                Draw(degree - 1, left_mid, left, top_mid, graphics);
-                Draw(degree - 1, right_mid, top_mid, right, graphics);
+                Draw(degree - 1, top, left_mid, right_mid, graphics, colors);
+                Draw(degree - 1, left_mid, left, top_mid, graphics, colors);
+                Draw(degree - 1, right_mid, top_mid, right, graphics, colors);
             }
         }
 
