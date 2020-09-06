@@ -4,8 +4,15 @@ namespace Fractals
 {
     class Trangle
     {
+        private Color[] colors;
+
+        public Trangle(Color[] colors)
+        {
+            this.colors = colors;
+        }
+
         private void DrawR(Point A, Point B, Point C, 
-            Pen pen, Graphics graphics, int degree, Color[] colors)
+            Pen pen, Graphics graphics, int degree)
         {
             Point D = new Point();
             Point v1 = new Point();
@@ -25,13 +32,13 @@ namespace Fractals
             if (degree > 1)
             {
                 degree--;
-                DrawR(A, B, D, pen, graphics, degree, colors);
-                DrawR(B, C, D, pen, graphics, degree, colors);
-                DrawR(A, C, D, pen, graphics, degree, colors);
+                DrawR(A, B, D, pen, graphics, degree);
+                DrawR(B, C, D, pen, graphics, degree);
+                DrawR(A, C, D, pen, graphics, degree);
             }
         }
 
-        public void Draw(int x, int y, Graphics graphics, int degree, Color[] colors)
+        public void Draw(int x, int y, Graphics graphics, int degree)
         {
             Pen pen = new Pen(colors[0], 1);
             int delta = 100;
@@ -43,7 +50,7 @@ namespace Fractals
             graphics.DrawLine(pen, A.X, A.Y, B.X, B.Y);
             graphics.DrawLine(pen, B.X, B.Y, C.X, C.Y);
             graphics.DrawLine(pen, A.X, A.Y, C.X, C.Y);
-            DrawR(A, B, C, pen, graphics, degree, colors);
+            DrawR(A, B, C, pen, graphics, degree);
         }
     }
 }

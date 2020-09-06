@@ -4,13 +4,19 @@ namespace Fractals
 {
     class TSquare
     {
-        public void Draw(PointF A, int size, int iter, Graphics graphics)
+        private Color[] colors;
+        public TSquare(Color[] colors)
         {
-            Brush br = new SolidBrush(Color.Red);
+            this.colors = colors;
+        }
 
-            if (iter == 1)
+        public void Draw(PointF A, int size, int degree, Graphics graphics)
+        {
+            Brush brush = new SolidBrush(colors[degree - 1]);
+
+            if (degree == 1)
             {
-                graphics.FillRectangle(br, A.X, A.Y, size, size);
+                graphics.FillRectangle(brush, A.X, A.Y, size, size);
                 return;
             }
 
@@ -33,8 +39,8 @@ namespace Fractals
             points[3].Y = A.Y + size - delta;
 
             for (int i = 0; i < 4; i++)
-                Draw(points[i], size / 2, iter - 1, graphics);
-            graphics.FillRectangle(br, A.X, A.Y, size, size);
+                Draw(points[i], size / 2, degree - 1, graphics);
+            graphics.FillRectangle(brush, A.X, A.Y, size, size);
 
             return;
         }

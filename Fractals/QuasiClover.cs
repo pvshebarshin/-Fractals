@@ -4,13 +4,18 @@ namespace Fractals
 {
     class QuasiClover
     {
-        public void Draw(int x0, int y0, int r, int delta, int degree, Graphics graphics, SolidBrush solidBrush)
-        {
-            graphics.FillEllipse(solidBrush, x0 - r, y0 - r, 2 * r, 2 * r);
+        Color[] colors;
+        public QuasiClover(Color[] colors)
+        { 
+            this.colors = colors;
+        }
 
+        public void Draw(int x0, int y0, int r, int delta, int degree, Graphics graphics)
+        {
+            SolidBrush solidBrush = new SolidBrush(colors[degree == 0 ? 0 : degree - 1]);
+            graphics.FillEllipse(solidBrush, x0 - r, y0 - r, 2 * r, 2 * r);
             if (degree == 0)
                 return;
-
             int[] x = new int[4];
             int[] y = new int[4];
             int d = 3 * r / 2;
@@ -28,7 +33,7 @@ namespace Fractals
             {
                 if (i - delta == 2 || i - delta == -2)
                     continue;
-                Draw(x[i], y[i], r / 2, i, degree - 1, graphics, solidBrush);
+                Draw(x[i], y[i], r / 2, i, degree - 1, graphics);
             }
         }
     }

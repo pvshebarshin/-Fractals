@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Fractals
 {
     class Serpinski
     {
-        private int width;
-        private int height;
+        protected int width;
+        protected int height;
+        protected Color[] colors;
 
-        public Serpinski(int width, int height)
+        public Serpinski(int width, int height, Color[] colors)
         {
             this.width = width;
             this.height = height;
+            this.colors = colors;
         }
 
         public int Width {
             get {
-                return this.width;
+                return width;
             }
         }
 
         public int Height {
             get {
-                return this.height;
+                return height;
             }
         }
     }

@@ -4,7 +4,7 @@ namespace Fractals
 {
     class SerpinskiCarpet : Serpinski
     {
-        public SerpinskiCarpet(int width, int height) : base(width, height)
+        public SerpinskiCarpet(int width, int height, Color[] colors) : base(width, height, colors)
         {
 
         }
@@ -12,7 +12,8 @@ namespace Fractals
         public void Draw(int degree, RectangleF rectangle, Graphics graphics)
         {
             if (degree == 0) {
-                graphics.FillRectangle(Brushes.Black, rectangle);
+                SolidBrush brush = new SolidBrush(colors[degree]);
+                graphics.FillRectangle(brush, rectangle);
             } else {
                 float width = rectangle.Width / 3f;
                 float height = rectangle.Height / 3f;

@@ -4,8 +4,15 @@ namespace Fractals
 {
     class CochSnowflake
     {
+        private Color[] colors;
+
+        public CochSnowflake(Color[] colors)
+        { 
+            this.colors = colors;
+        }
+
         private int RDraw(PointF point1, PointF point2, PointF point3, int iter, 
-            Graphics graphics, Color[] colors)
+            Graphics graphics)
         {
             if (iter > 0)
             {
@@ -19,15 +26,17 @@ namespace Fractals
                 graphics.DrawLine(pen, point5, point7);
                 graphics.DrawLine(pen, point4, point5);
 
-                RDraw(point4, point7, point5, iter - 1, graphics, colors);
-                RDraw(point7, point5, point4, iter - 1, graphics, colors);
-                RDraw(point1, point4, new PointF((2 * point1.X + point3.X) / 3, (2 * point1.Y + point3.Y) / 3), iter - 1, graphics, colors);
-                RDraw(point5, point2, new PointF((2 * point2.X + point3.X) / 3, (2 * point2.Y + point3.Y) / 3), iter - 1, graphics, colors);
+                RDraw(point4, point7, point5, iter - 1, graphics);
+                RDraw(point7, point5, point4, iter - 1, graphics);
+                RDraw(point1, point4, new PointF((2 * point1.X + point3.X) / 3, 
+                    (2 * point1.Y + point3.Y) / 3), iter - 1, graphics);
+                RDraw(point5, point2, new PointF((2 * point2.X + point3.X) / 3, 
+                    (2 * point2.Y + point3.Y) / 3), iter - 1, graphics);
             }
             return iter;
         }
 
-        public void Draw(int x, int y, int degree, Graphics graphics, Color[] colors) 
+        public void Draw(int x, int y, int degree, Graphics graphics) 
         {
             Pen pen = new Pen(colors[0], 1);
 
@@ -39,9 +48,9 @@ namespace Fractals
             graphics.DrawLine(pen, point2, point3);
             graphics.DrawLine(pen, point3, point1);
 
-            RDraw(point1, point2, point3, degree, graphics, colors);
-            RDraw(point2, point3, point1, degree, graphics, colors);
-            RDraw(point3, point1, point2, degree, graphics, colors);
+            RDraw(point1, point2, point3, degree, graphics);
+            RDraw(point2, point3, point1, degree, graphics);
+            RDraw(point3, point1, point2, degree, graphics);
         }
     }
 }

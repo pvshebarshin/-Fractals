@@ -5,26 +5,28 @@ namespace Fractals
     class CantorSet
     {
         private int h;
+        private Color[] colors;
 
-        public CantorSet(int h)
+        public CantorSet(int h, Color[] colors)
         { 
             this.h = h;
+            this.colors = colors;
         }
 
-        public void Draw(float x, float y, float width, Graphics graphics, int dep)
+        public void Draw(float x, float y, float width, Graphics graphics, int degree)
         {
-            SolidBrush Black = new SolidBrush(Color.Black);
-            Pen myPen = new Pen(Color.Black, 0.1f);
+            SolidBrush Black = new SolidBrush(colors[degree == 0 ? 0 : degree - 1]);
+            Pen myPen = new Pen(colors[degree == 0 ? 0 : degree - 1], 0.1f);
 
-            if (dep > 0)
+            if (degree > 0)
             {
                 graphics.DrawRectangle(myPen, x, y, width, 12);
                 graphics.FillRectangle(Black, x, y, width, 12);
 
                 y += this.h;
 
-                Draw(x + width * 2 / 3, y, width / 3, graphics, dep - 1);
-                Draw(x, y, width / 3, graphics, dep - 1);
+                Draw(x + width * 2 / 3, y, width / 3, graphics, degree - 1);
+                Draw(x, y, width / 3, graphics, degree - 1);
             }
         }
     }

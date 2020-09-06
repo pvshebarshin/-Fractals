@@ -6,17 +6,19 @@ namespace Fractals
     class NestedSpiralSquares
     {
         private double x0, y0;
-        public NestedSpiralSquares(double x0, double y0)
+        private Color[] colors;
+        public NestedSpiralSquares(double x0, double y0, Color[] colors)
         { 
             this.x0 = x0;
             this.y0 = y0;
+            this.colors = colors;
         }
 
-        private void Draw(double k, double b, Graphics graphics)
+        private void Draw(double k, double b, Graphics graphics, int degree)
         {
             int x1, x2, x3, x4, 
                 y1, y2, y3, y4;
-            Pen myPen = new Pen(Color.Black, 1);
+            Pen myPen = new Pen(colors[degree], 1);
 
             x1 = (int)(x0 + k * Math.Cos(b + 1 * Math.PI / 4));
             y1 = (int)(y0 + k * Math.Sin(b + 1 * Math.PI / 4));
@@ -39,9 +41,9 @@ namespace Fractals
             double lenght = (x + y) / 3, 
                 shift = 0;
 
-            for (int i = 1; i <= degree; i++)
+            for (int i = 0; i < degree; i++)
             {
-                Draw(lenght, shift, graphics);
+                Draw(lenght, shift, graphics, i);
                 shift += Math.PI / 19;
                 lenght *= Math.Sin(Math.PI / 3);
             }
