@@ -5,10 +5,14 @@ namespace Fractals
     class CochSnowflake
     {
         private Color[] colors;
+        private readonly int dx;
+        private readonly int dy;
 
-        public CochSnowflake(Color[] colors)
+        public CochSnowflake(Color[] colors, int dx, int dy)
         { 
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         private int RDraw(PointF point1, PointF point2, PointF point3, int iter, 
@@ -40,9 +44,9 @@ namespace Fractals
         {
             Pen pen = new Pen(colors[0], 1);
 
-            PointF point1 = new PointF(x / 8, y / 4);
-            PointF point2 = new PointF(x / 8 + y * 6 / 8, y / 4);
-            PointF point3 = new PointF(x / 2, y * 7 / 8);
+            PointF point1 = new PointF(x / 8 + dx, y / 4 + dy);
+            PointF point2 = new PointF(x / 8 + y * 6 / 8 + dx, y / 4 + dy);
+            PointF point3 = new PointF(x / 2 + dx, y * 7 / 8 + dy);
 
             graphics.DrawLine(pen, point1, point2);
             graphics.DrawLine(pen, point2, point3);

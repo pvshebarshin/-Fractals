@@ -5,13 +5,19 @@ namespace Fractals
 {
     class NestedSpiralSquares
     {
-        private double x0, y0;
-        private Color[] colors;
-        public NestedSpiralSquares(double x0, double y0, Color[] colors)
+        private readonly double x0;
+        private readonly double y0;
+        private readonly Color[] colors;
+        private readonly int dx;
+        private readonly int dy;
+
+        public NestedSpiralSquares(double x0, double y0, Color[] colors, int dx, int dy)
         { 
             this.x0 = x0;
             this.y0 = y0;
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         private void Draw(double k, double b, Graphics graphics, int degree)
@@ -31,8 +37,8 @@ namespace Fractals
 
             graphics.DrawPolygon(myPen, new Point[] 
             {
-                new Point(x1,y1), new Point(x2,y2),
-                new Point(x3,y3), new Point(x4,y4),
+                new Point(x1 + dx, y1 + dy), new Point(x2 + dx, y2 + dy),
+                new Point(x3 + dx, y3 + dy), new Point(x4 + dx, y4 + dy),
             });
         }
 

@@ -5,10 +5,13 @@ namespace Fractals
     class Trangle
     {
         private Color[] colors;
+        private int dx, dy;
 
-        public Trangle(Color[] colors)
+        public Trangle(Color[] colors, int dx, int dy)
         {
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         private void DrawR(Point A, Point B, Point C, 
@@ -43,9 +46,9 @@ namespace Fractals
             Pen pen = new Pen(colors[0], 1);
             int delta = 100;
 
-            Point A = new Point(x * 3 / 4 + delta, y * 3 / 4 + 50);
-            Point B = new Point(x / 4 - delta, y * 3 / 4 + 50);
-            Point C = new Point(x / 2, x / 4 - delta + 50);
+            Point A = new Point(x * 3 / 4 + delta + dx, y * 3 / 4 + 50 + dy);
+            Point B = new Point(x / 4 - delta + dx, y * 3 / 4 + 50 + dy);
+            Point C = new Point(x / 2 + dx, x / 4 - delta + 50 + dy);
 
             graphics.DrawLine(pen, A.X, A.Y, B.X, B.Y);
             graphics.DrawLine(pen, B.X, B.Y, C.X, C.Y);

@@ -6,10 +6,14 @@ namespace Fractals
     class Gosper
     {
         private Color[] colors;
+        private readonly int dx;
+        private readonly int dy;
 
-        public Gosper(Color[] colors)
+        public Gosper(Color[] colors, int dx, int dy)
         { 
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         public void Draw(double x, double y, double length, double u, 
@@ -33,9 +37,9 @@ namespace Fractals
                 Draw(ref x, ref y, length, u, degree - 1, 0, graphics);
                 Draw(ref x, ref y, length, u - Math.PI / 3, degree - 1, 1, graphics);
             } else {
-                graphics.DrawLine(new Pen(colors[degree], 1), (float)Math.Round(x), 
-                    (float)Math.Round(y), (float)Math.Round(x + Math.Cos(u) * length), 
-                    (float)Math.Round(y - Math.Sin(u) * length));
+                graphics.DrawLine(new Pen(colors[degree], 1), (float)Math.Round(x) + dx, 
+                    (float)Math.Round(y) + dy, (float)Math.Round(x + Math.Cos(u) * length) + dx, 
+                    (float)Math.Round(y - Math.Sin(u) * length) + dy);
             }
         }
 

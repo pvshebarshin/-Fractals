@@ -4,13 +4,17 @@ namespace Fractals
 {
     class CantorSet
     {
-        private int h;
-        private Color[] colors;
+        private readonly int h;
+        private readonly Color[] colors;
+        private readonly int dx;
+        private readonly int dy;
 
-        public CantorSet(int h, Color[] colors)
+        public CantorSet(int h, Color[] colors, int dx, int dy)
         { 
             this.h = h;
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         public void Draw(float x, float y, float width, Graphics graphics, int degree)
@@ -20,10 +24,10 @@ namespace Fractals
 
             if (degree > 0)
             {
-                graphics.DrawRectangle(myPen, x, y, width, 12);
-                graphics.FillRectangle(Black, x, y, width, 12);
+                graphics.DrawRectangle(myPen, x + dx, y + dy, width, 12);
+                graphics.FillRectangle(Black, x + dx, y + dy, width, 12);
 
-                y += this.h;
+                y += h;
 
                 Draw(x + width * 2 / 3, y, width / 3, graphics, degree - 1);
                 Draw(x, y, width / 3, graphics, degree - 1);

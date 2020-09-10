@@ -5,15 +5,20 @@ namespace Fractals
     class QuasiClover
     {
         Color[] colors;
-        public QuasiClover(Color[] colors)
+        private readonly int dx;
+        private readonly int dy;
+
+        public QuasiClover(Color[] colors, int dx, int dy)
         { 
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
         public void Draw(int x0, int y0, int r, int delta, int degree, Graphics graphics)
         {
             SolidBrush solidBrush = new SolidBrush(colors[degree == 0 ? 0 : degree - 1]);
-            graphics.FillEllipse(solidBrush, x0 - r, y0 - r, 2 * r, 2 * r);
+            graphics.FillEllipse(solidBrush, x0 - r + dx, y0 - r + dy, 2 * r, 2 * r);
             if (degree == 0)
                 return;
             int[] x = new int[4];

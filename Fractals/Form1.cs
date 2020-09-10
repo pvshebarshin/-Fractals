@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Fractals
@@ -26,55 +22,7 @@ namespace Fractals
 
         private void MainButton_Click(object sender, EventArgs e)
         {
-            getColors();
-            FractalPrinter fractal = new FractalPrinter(graphics, bitmap, pictureBox.Width, pictureBox.Height, colors);
-            switch (NUMBER_OF_FRACTAL)
-            { 
-                case 1:
-                    pictureBox.Image = fractal.DrawTrangle(trackBar.Value);
-                    break;
-
-                case 2:
-                    pictureBox.Image = fractal.DrawCochSnowflake(trackBar.Value);
-                    break;
-
-                case 3:
-                    pictureBox.Image = fractal.DrawHilbert(trackBar.Value);
-                    break;
-
-                case 4:
-                    pictureBox.Image = fractal.DrawGosper(trackBar.Value);
-                    break;
-
-                case 5:
-                    pictureBox.Image = fractal.DrawSerpinskiTriangle(trackBar.Value);
-                    break;
-
-                case 6:
-                    pictureBox.Image = fractal.DrawSerpinskiCarpet(trackBar.Value);
-                    break;
-
-                case 7:
-                    pictureBox.Image = fractal.DrawQuasiClover(trackBar.Value);
-                    break;
-
-                case 8:
-                    pictureBox.Image = fractal.DrawCantorSet(trackBar.Value);
-                    break;
-
-                case 9:
-                    pictureBox.Image = fractal.DrawTSquare(trackBar.Value);
-                    break;
-
-                case 10:
-                    pictureBox.Image = fractal.DrawH(trackBar.Value);
-                    break;
-
-                case 11:
-                    pictureBox.Image = fractal.DrawNestedSpiralSquares(trackBar.Value);
-                    break;
-            }
-            
+            Draw();
         }
 
         private void trackBar_Scroll(object sender, EventArgs e)
@@ -128,6 +76,14 @@ namespace Fractals
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox.Text = "Снежинка Коха";
+            
+            vScrollBar.Minimum = -pictureBox.Height;
+            vScrollBar.Maximum = pictureBox.Height;
+            vScrollBar.Value = 0;
+
+            hScrollBar.Minimum = -pictureBox.Width;
+            hScrollBar.Maximum = pictureBox.Width;
+            vScrollBar.Value = 0;
         }
 
         private void colorButtonBegin_Click(object sender, EventArgs e)
@@ -210,6 +166,78 @@ namespace Fractals
             ((ComboBox)sender).SelectionLength =
                 ((ComboBox)sender).Text.Length - ((ComboBox)sender).SelectionStart;
             e.Handled = true;
+        }
+
+        private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (pictureBox.Image != null)
+                Draw();
+        }
+
+        private void Draw()
+        {
+            getColors();
+            FractalPrinter fractal = new FractalPrinter(graphics, bitmap, pictureBox.Width, pictureBox.Height, colors, hScrollBar.Value, vScrollBar.Value);
+            switch (NUMBER_OF_FRACTAL)
+            {
+                case 1:
+                    pictureBox.Image = fractal.DrawTrangle(trackBar.Value);
+                    break;
+
+                case 2:
+                    pictureBox.Image = fractal.DrawCochSnowflake(trackBar.Value);
+                    break;
+
+                case 3:
+                    pictureBox.Image = fractal.DrawHilbert(trackBar.Value);
+                    break;
+
+                case 4:
+                    pictureBox.Image = fractal.DrawGosper(trackBar.Value);
+                    break;
+
+                case 5:
+                    pictureBox.Image = fractal.DrawSerpinskiTriangle(trackBar.Value);
+                    break;
+
+                case 6:
+                    pictureBox.Image = fractal.DrawSerpinskiCarpet(trackBar.Value);
+                    break;
+
+                case 7:
+                    pictureBox.Image = fractal.DrawQuasiClover(trackBar.Value);
+                    break;
+
+                case 8:
+                    pictureBox.Image = fractal.DrawCantorSet(trackBar.Value);
+                    break;
+
+                case 9:
+                    pictureBox.Image = fractal.DrawTSquare(trackBar.Value);
+                    break;
+
+                case 10:
+                    pictureBox.Image = fractal.DrawH(trackBar.Value);
+                    break;
+
+                case 11:
+                    pictureBox.Image = fractal.DrawNestedSpiralSquares(trackBar.Value);
+                    break;
+            }
+        }
+
+        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            if(pictureBox.Image != null)
+                Draw();
+        }
+
+        private void buttonx0y0_Click(object sender, EventArgs e)
+        {
+            hScrollBar.Value = 0;
+            vScrollBar.Value = 0;
+            if(pictureBox.Image != null)
+                Draw();
         }
     }
 }

@@ -7,15 +7,19 @@ namespace Fractals
         private float LastX;
         private float LastY;
         private Color[] colors;
+        private readonly int dx;
+        private readonly int dy;
 
-        public Hilbert(float LastX, float LastY, Color[] colors)
+        public Hilbert(float LastX, float LastY, Color[] colors, int dx, int dy)
         { 
             this.LastX = LastX;
             this.LastY = LastY;
             this.colors = colors;
+            this.dx = dx;
+            this.dy = dy;
         }
 
-        public void Draw(int x, int y, Graphics graphics, int degree, float start_length)
+        public void Draw(Graphics graphics, int degree, float start_length)
         { 
             DrawR(degree, start_length, 0, graphics);
         }
@@ -40,10 +44,10 @@ namespace Fractals
 
         private void Drawing(Graphics graphics, float dx, float dy, int degree)
         {
-            graphics.DrawLine(new Pen(colors[colors.Length - degree], 1), LastX, LastY, 
-                LastX + dx, LastY + dy);
-            this.LastX += dx;
-            this.LastY += dy;
+            graphics.DrawLine(new Pen(colors[colors.Length - degree], 1), LastX + this.dx, LastY + this.dy, 
+                LastX + dx + this.dx, LastY + dy + this.dy);
+            LastX += dx;
+            LastY += dy;
         }
     }
 }
